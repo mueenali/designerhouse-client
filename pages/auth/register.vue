@@ -51,7 +51,6 @@
             v-model.trim="form.password_confirmation"
             class="form-control form-control-lg font-14 fw-300"
             name="password_confirmation"
-            :class="{ 'is-invalid': form.errors.has('password_confirmation') }"
             placeholder="Confirm Password"/>
           <has-error :form="form" field="password_confirmation"> </has-error>
         </div>
