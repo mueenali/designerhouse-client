@@ -1,10 +1,55 @@
 <template>
 
+  <div class="text-right">
+    <button
+      :disabled="loading"
+      :type="nativeType"
+      class="btn"
+      :class="{
+        [`btn-${type}`]: true,
+        ['btn-block']: block,
+        [`btn-${size}`]: true,
+        [classes]: true
+      }"
+    >
+      <span v-if="loading">
+              <i class="fas fa-spinner fa-spin"> </i>
+      </span>
+      <slot/>
+    </button>
+  </div>
 </template>
 
 <script>
   export default {
-    name: '_base-button'
+    name: 'base-button',
+    props: {
+      type:{
+        type: String,
+        default: 'primary',
+      },
+      nativeType: {
+        type: String,
+        default:'submit'
+      },
+      loading: {
+        type: Boolean,
+        default: false
+      },
+      block: {
+        type: Boolean,
+        default: false
+      },
+      size: {
+        type: String,
+        default: 'md'
+      },
+      classes: {
+        type: String,
+        defaults: ''
+      }
+    }
+
   }
 </script>
 

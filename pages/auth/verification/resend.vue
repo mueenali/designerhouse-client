@@ -10,23 +10,20 @@
         </alert-error>
         <alert-success :form="form">Verification link has been resent to your email</alert-success>
         <div class="form-group">
-          <input
-            type="email"
+          <base-input
             v-model.trim="form.email"
-            class="form-control form-control-lg font-14 fw-300"
-            name="email"
-            :class="{ 'is-invalid': form.errors.has('email') }"
-            placeholder="Email"/>
-          <has-error :form="form" field="email"> </has-error>
+            :form="form"
+            field="email"
+            inputType="email"
+            placeholder="Email"
+          > </base-input>
         </div>
         <div class="text-right">
-          <button type="submit" :disabled="form.busy" class="btn btn-primary primary-bg-color font-16 fw-500 text-uppercase"
-          >
-           <span v-if="form.busy">
-              <i class="fas fa-spinner fa-spin"> </i>
-           </span>
+          <base-button
+            :loading="form.busy"
+            classes="primary-bg-color font-16 fw-500 text-uppercase">
             Resend
-          </button>
+          </base-button>
         </div>
       </form>
     </div>
@@ -35,6 +32,7 @@
 
 <script>
   export default {
+    middleware: ['guest'],
     data(){
        return{
          form:this.$vform({

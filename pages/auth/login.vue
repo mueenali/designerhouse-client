@@ -10,40 +10,37 @@
           <nuxt-link :to="{name:'verification.resend'}"> Resend verification email</nuxt-link>
         </alert-error>
         <div class="form-group">
-          <input
-            type="email"
+          <base-input
+            :form="form"
+            field="email"
+            inputType="email"
             v-model.trim="form.email"
-            class="form-control form-control-lg font-14 fw-300"
-            name="email"
-            :class="{ 'is-invalid': form.errors.has('email') }"
-            placeholder="Email"/>
-          <has-error :form="form" field="email"> </has-error>
+            placeholder="Email"
+          > </base-input>
         </div>
+
         <div class="form-group">
-          <input
-            type="password"
-            class="form-control form-control-lg font-14 fw-300"
-            name="password"
-            v-model.trim = "form.password"
-            :class="{ 'is-invalid': form.errors.has('password') }"
-            placeholder="Password"/>
-          <has-error :form="form" field="password"> </has-error>
+          <base-input
+          v-model.trim="form.password"
+          :form="form"
+          field="password"
+          inputType="password"
+          placeholder="Password"
+        > </base-input>
         </div>
+
         <div class="mt-4 mb-4 clearfix">
           <nuxt-link class="forgot-pass color-blue font-14 fw-400" :to="{name:'password.email'}">
             Forgot password?
           </nuxt-link>
         </div>
 
-        <div class="text-right">
-          <button type="submit" :disabled="form.busy" class="btn btn-primary primary-bg-color font-16 fw-500 text-uppercase"
-          >
-           <span v-if="form.busy">
-              <i class="fas fa-spinner fa-spin"> </i>
-           </span>
-            Login
-          </button>
-        </div>
+        <base-button
+          :loading="form.busy"
+          classes="primary-bg-color font-16 fw-500 text-uppercase">
+          Login
+        </base-button>
+
         <p class="font-14 fw-400 text-center mt-4">
           Don't have an account yet?
           <nuxt-link class="color-blue" :to="{name:'register'}">Create an account</nuxt-link>
@@ -55,6 +52,7 @@
 
 <script>
   export default {
+    middleware: ['guest'],
     data(){
       return {
         form: this.$vform({

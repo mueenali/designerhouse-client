@@ -16,15 +16,13 @@
             placeholder="Email"/>
           <has-error :form="form" field="email"> </has-error>
         </div>
-        <div class="text-right">
-          <button type="submit" :disabled="form.busy" class="btn btn-primary primary-bg-color font-16 fw-500 text-uppercase"
-          >
-           <span v-if="form.busy">
-              <i class="fas fa-spinner fa-spin"> </i>
-           </span>
-            Send reset link
-          </button>
-        </div>
+
+        <base-button
+          :loading="form.busy"
+          :classes="'primary-bg-color font-16 fw-500 text-uppercase'">
+          Send reset link
+        </base-button>
+
         <p class="font-14 fw-400 text-center mt-4">
           <nuxt-link class="color-blue" :to="{name:'login'}">Back to login page</nuxt-link>
         </p>
@@ -35,6 +33,7 @@
 
 <script>
   export default {
+    middleware: ['guest'],
     data(){
       return{
         status: '',

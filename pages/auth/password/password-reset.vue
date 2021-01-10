@@ -40,15 +40,13 @@
             placeholder="Confirm Password"/>
           <has-error :form="form" field="password_confirmation"> </has-error>
         </div>
-        <div class="text-right">
-          <button type="submit" :disabled="form.busy" class="btn btn-primary primary-bg-color font-16 fw-500 text-uppercase"
-          >
-           <span v-if="form.busy">
-              <i class="fas fa-spinner fa-spin"> </i>
-           </span>
-           Reset password
-          </button>
-        </div>
+
+        <base-button
+          :loading="form.busy"
+          :classes="'primary-bg-color font-16 fw-500 text-uppercase'">
+         Reset password
+        </base-button>
+
       </form>
     </div>
   </section>
@@ -56,6 +54,7 @@
 
 <script>
   export default {
+    middleware: ['guest'],
     data(){
       return{
         status: '',
